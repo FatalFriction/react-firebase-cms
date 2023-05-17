@@ -1,0 +1,9 @@
+.list {
+  display: flex;
+  width: 100%;
+  overflow: auto;
+
+  .listContainer {
+    flex: 6;
+  }
+}
