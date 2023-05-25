@@ -50,7 +50,7 @@ const Login = () => {
   };
 
   const checkUid = (id) => {
-    const uid = "07WH8xbk7gSCnvJ2QtZWFy5V91p1";
+    const uid = "X0z4xWSRqUco2O9UaPsYPN0HTit2";
 
     if(id === uid ) {
       return true;

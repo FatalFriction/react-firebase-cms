@@ -14,6 +14,8 @@ import { ToastContainer } from "react-toastify";
 import Listprod from "./pages/p_list/Listprod";
 import Newprod from "./pages/new_products/Newprod";
 import Singlep from "./pages/singlep/Singlep";
+import Singleo from "./pages/singleo/Singleo";
+import Listorders from "./pages/o_list/Listorders";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -43,7 +45,10 @@ function App() {
               index
               element={
                 <RequireAuth>
+                <>
                   <Home />
+                  <ToastContainer/>
+                </>
                 </RequireAuth>
               }
             />
@@ -64,7 +69,7 @@ function App() {
                 element={
                   <RequireAuth>
                     <>
-                    <Single />
+                    <Single/>
                     <ToastContainer/>
                     </>
                   </RequireAuth>
@@ -111,6 +116,30 @@ function App() {
                   <RequireAuth>
                     <>
                     <Newprod inputs={productInputs} title="Add New Product" />
+                    <ToastContainer/>
+                    </>
+                  </RequireAuth>
+                }
+              />
+            </Route>
+            <Route path="orders">
+              <Route
+                index
+                element={
+                  <RequireAuth>
+                    <>
+                    <Listorders />
+                    <ToastContainer/>
+                    </>
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/orders/:ordersId"
+                element={
+                  <RequireAuth>
+                    <>
+                    <Singleo />
                     <ToastContainer/>
                     </>
                   </RequireAuth>

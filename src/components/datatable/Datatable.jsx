@@ -19,14 +19,16 @@ const Datatable = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    
     // LISTEN (REALTIME)
     const unsub = onSnapshot(
       collection(db, "users"),
       (snapShot) => {
         let list = [];
         snapShot.docs.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
+          const data = doc.data();
+          const timeStamp = data.timeStamp.toDate(); // Convert Firebase Timestamp to JavaScript Date object
+          const formattedDate = timeStamp.toISOString().split('T')[0]; // Convert Date object to "yyyy-mm-dd" format
+          list.push({ id: doc.id, ...data, timeStamp: formattedDate });
         });
         setData(list);
       },
@@ -34,11 +36,12 @@ const Datatable = () => {
         console.log(error);
       }
     );
-
+  
     return () => {
       unsub();
     };
   }, []);
+  
 
   const handleDelete = async (id) => {
     try {

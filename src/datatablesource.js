@@ -1,5 +1,5 @@
   export const userColumns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: "id", headerName: "ID", width: 150 },
     {
       field: "user",
       headerName: "User",
@@ -18,11 +18,15 @@
       headerName: "Email",
       width: 230,
     },
-
     {
-      field: "address",
-      headerName: "Address",
+      field: "displayName",
+      headerName: "User Name",
       width: 250,
+    },
+    {
+      field: "timeStamp",
+      headerName: "Created At",
+      width: 150,
     },
   ];
 
@@ -114,6 +118,71 @@
         return (
           <div className={`cellWithStatus ${params.row.authenticity}`}>
             {params.row.authenticity}
+          </div>
+        );
+      },
+    },
+  ];
+  
+  export const ordersColumns = [
+    { field: "id", headerName: "Order ID", width: 100 },
+    {
+      field: "userName",
+      headerName: "Customer Name",
+      width: 180,
+      renderCell: (params) => {
+        return (
+          <div className="cellWithImg">
+          <img className="cellImg" src={params.row.userPhotoURL} alt="customer" />
+            {params.row.userName}
+          </div>
+        );
+      },
+    },
+    {
+      field: "timeStamp",
+      headerName: "Order Created",
+      width: 120,
+      renderCell: (params) => {
+        return (
+          <div className={`cellWithStatus ${params.row.timeStamp}`}>
+            {params.row.timeStamp}
+          </div>
+        );
+      },
+    },
+    {
+      field: "userAddress",
+      headerName: "Customer Address",
+      width: 300,
+      renderCell: (params) => {
+        return (
+          <div className={`cellWithStatus ${params.row.userAddress}`}>
+            {params.row.userAddress}
+          </div>
+        );
+      },
+    },
+    {
+      field: "useremail",
+      headerName: "Customer E-mail",
+      width: 250,
+      renderCell: (params) => {
+        return (
+          <div className={`cellWithStatus ${params.row.useremail}`}>
+            {params.row.useremail}
+          </div>
+        );
+      },
+    },
+    {
+      field: "totalCart",
+      headerName: "Total Payment Order",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <div className={`cellWithStatus ${params.row.totalCart}`}>
+            {params.row.totalCart.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
           </div>
         );
       },

@@ -2,12 +2,12 @@ import "./single.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Chart from "../../components/chart/Chart";
-import List from "../../components/table/Table";
+import List from "../../components/tableu/Table";
 import { useSelector } from "react-redux";
 
-const Single = ({id}) => {
+const Single = () => {
   const userData = useSelector(state => state.users.users);
-
+  
   return (
     <div className="single">
       <Sidebar />
@@ -26,8 +26,8 @@ const Single = ({id}) => {
               <div className="details">
                 <h1 className="itemTitle">{userData.displayName}</h1>
                 <div className="detailItem">
-                  <span className="itemKey">Username: </span>
-                  <span className="itemValue">{userData.username}</span>
+                  <span className="itemKey">Sign in Provider: </span>
+                  <span className="itemValue">{userData.SignInprovider}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Email: </span>

@@ -8,6 +8,7 @@ import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlin
 import { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
+import { Link } from "react-router-dom";
 
 const Widget = ({ type }) => {
   const [amount, setAmount] = useState(null);
@@ -37,6 +38,7 @@ const Widget = ({ type }) => {
         title: "ORDERS",
         isMoney: false,
         link: "View all orders",
+        query:"order",
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
@@ -90,33 +92,41 @@ const Widget = ({ type }) => {
   
   useEffect(() => {
     const fetchData = async () => {
-
       const today = new Date();
       const lastMonth = new Date(new Date().setMonth(today.getMonth() - 1));
       const prevMonth = new Date(new Date().setMonth(today.getMonth() - 2));
-
+  
+      let createdAtField = "timeStamp"; // Default field name
+  
+      if (data.query === "products") {
+        createdAtField = "createdAt"; // Use "createdAt" field for the "production" query
+      }
+  
       const lastMonthQuery = query(
         collection(db, data.query),
-        where("timeStamp", "<=", today),
-        where("timeStamp", ">", lastMonth)
+        where(createdAtField, "<=", today),
+        where(createdAtField, ">", lastMonth)
       );
+  
       const prevMonthQuery = query(
         collection(db, data.query),
-        where("timeStamp", "<=", lastMonth),
-        where("timeStamp", ">", prevMonth)
+        where(createdAtField, "<=", lastMonth),
+        where(createdAtField, ">", prevMonth)
       );
-
+  
       const lastMonthData = await getDocs(lastMonthQuery);
       const prevMonthData = await getDocs(prevMonthQuery);
-
+  
       setAmount(lastMonthData.docs.length);
       setDiff(
         ((lastMonthData.docs.length - prevMonthData.docs.length) / prevMonthData.docs.length) *
           100
       );
     };
+  
     fetchData();
   }, [data.query]);
+  
 
   return (
     <div className="widget">
@@ -125,7 +135,15 @@ const Widget = ({ type }) => {
         <span className="counter">
           {data.isMoney && "$"} {amount}
         </span>
-        <span className="link">{data.link}</span>
+        <span className="link">
+        {data.link === "See all users"
+          ? <Link to="/users">{data.link}</Link>
+          : data.link === "View all orders"
+          ? <Link to="/orders">{data.link}</Link>
+          : data.link === "See details"
+          ? <Link to="/products">{data.link}</Link>
+          : null}
+      </span>
       </div>
       <div className="right">
         <div className={`percentage ${diff < 0 ? "negative" : "positive"}`}>

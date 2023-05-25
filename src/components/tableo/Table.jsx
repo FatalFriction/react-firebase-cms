@@ -1,6 +1,6 @@
 import "./table.scss";
 import { useEffect, useState } from "react";
-import { collection, query, orderBy, limit, onSnapshot } from "firebase/firestore";
+import { collection, query, orderBy, limit, onSnapshot, where, doc } from "firebase/firestore";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,8 +10,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { db } from "../../firebase";
 import TablePagination from "@mui/material/TablePagination";
+import { useParams } from "react-router-dom";
 
 const List = () => {
+  const { ordersId } = useParams();
   const [realdata, setRealData] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -27,17 +29,19 @@ const List = () => {
         async (snapshot) => {
           const orders = [];
           snapshot.forEach((doc) => {
-            orders.push({ id: doc.id, ...doc.data() });
+            if (ordersId === doc.id) {
+              orders.push({ id: doc.id, ...doc.data() });
+            }
           });
           setRealData(orders);
         }
       );
-
+  
       return () => unsubscribe();
     };
-
+  
     fetchData();
-  }, [rowsPerPage]);
+  }, [ordersId, rowsPerPage]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
