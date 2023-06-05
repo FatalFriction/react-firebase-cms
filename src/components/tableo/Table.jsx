@@ -1,6 +1,6 @@
 import "./table.scss";
 import { useEffect, useState } from "react";
-import { collection, query, orderBy, limit, onSnapshot, where, doc } from "firebase/firestore";
+import { collection, query, orderBy, limit, onSnapshot } from "firebase/firestore";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";

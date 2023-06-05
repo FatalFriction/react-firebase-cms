@@ -60,8 +60,6 @@ const Datatableorders = () => {
     };
   }, []);
 
-  console.log(data)
-
   const handleDelete = async (id) => {
     try {
       await deleteDoc(doc(db, "order", id));
@@ -82,6 +80,7 @@ const Datatableorders = () => {
   };
 
   const [open, setOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   

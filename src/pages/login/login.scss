@@ -5,9 +5,14 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    overflow: hidden;
   }
 
 body {
+
+  img {
+    overflow: hidden;
+  }
 
   section {
     position: relative;

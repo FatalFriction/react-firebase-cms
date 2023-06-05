@@ -1,9 +1,9 @@
 import "./navbar.scss";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext, useState } from "react";
 import { useEffect } from "react";
+import { DashboardCustomizeOutlined } from "@mui/icons-material";
 
 const Navbar = () => {
   
@@ -46,8 +46,7 @@ const Navbar = () => {
     <div className="navbar">
       <div className="wrapper">
         <div className="search">
-          <input type="text" placeholder="Search..." />
-          <SearchOutlinedIcon className="icon"/>
+          <DashboardCustomizeOutlined className="icon"/>
         </div>
 
         <div className="items">
